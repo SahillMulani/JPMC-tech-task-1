@@ -214,7 +214,7 @@ def run(routes, host = '0.0.0.0', port = 8080):
     thread = threading.Thread(target = server.serve_forever)
     thread.daemon = True
     thread.start()
-    print 'HTTP server started on port 8080'
+    print('HTTP server started on port 8080')
     while True:
         from time import sleep
         sleep(1)
@@ -262,7 +262,7 @@ class App(object):
                 yield t, bids, asks
 
     def read_10_first_lines(self):
-            for _ in xrange(10):
+            for _ in range(10):
                 self._data_1.next()
                 self._data_2.next()
 
@@ -275,12 +275,12 @@ class App(object):
             t1, bids1, asks1 = self._current_book_1.next()
             t2, bids2, asks2 = self._current_book_2.next()
         except Exception as e:
-            print "error getting stocks...reinitalizing app"
+            print("error getting stocks...reinitalizing app")
             self.__init__()
             t1, bids1, asks1 = self._current_book_1.next()
             t2, bids2, asks2 = self._current_book_2.next()
         t = t1 if t1 > t2 else t2
-        print 'Query received @ t%s' % t
+        print('Query received @ t%s' % t)
         return [{
             'id': x and x.get('id', None),
             'stock': 'ABC',
@@ -314,6 +314,6 @@ class App(object):
 
 if __name__ == '__main__':
     if not os.path.isfile('test.csv'):
-        print "No data found, generating..."
+        print("No data found, generating...")
         generate_csv()
     run(App())
